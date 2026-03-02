@@ -80,9 +80,9 @@ export default function StudentPage() {
 
         // Optimized for Safari iOS
         const geoOptions = {
-            enableHighAccuracy: true,
+            enableHighAccuracy: false, // High accuracy often triggers strict permission Denied on iOS Safari if not precision-allowed
             timeout: 15000, // 15s timeout
-            maximumAge: 0   // Force fresh location
+            maximumAge: 5000   // Allow 5s cached location to speed up and avoid prompt loops
         };
 
         const successCallback = async (position: GeolocationPosition) => {
@@ -111,7 +111,7 @@ export default function StudentPage() {
         const errorCallback = (error: GeolocationPositionError) => {
             setStatus('error');
             if (error.code === error.PERMISSION_DENIED) {
-                setMessage('BẠN ĐÃ TỪ CHỐI QUYỀN VỊ TRÍ! Vui lòng vào Cài đặt của trình duyệt Safari/Chrome để CẤP LẠI QUYỀN LOCATION.');
+                setMessage('BẠN ĐÃ TỪ CHỐI QUYỀN VỊ TRÍ! Vui lòng vào Cài đặt (Settings) -> Quyền riêng tư (Privacy) -> Dịch vụ định vị (Location Services) -> Bật cho Safari/Chrome.');
             } else if (error.code === error.POSITION_UNAVAILABLE) {
                 setMessage('Không nhận diện được tín hiệu GPS. Cần bật định vị trên thiết bị.');
             } else if (error.code === error.TIMEOUT) {
@@ -197,14 +197,19 @@ export default function StudentPage() {
                             )}
 
                             {status !== 'success' && (
-                                <button
-                                    onClick={handleCheckIn}
-                                    disabled={status === 'loading'}
-                                    className="w-full bg-slate-800 hover:bg-black disabled:bg-slate-300 disabled:text-slate-500 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl active:translate-y-0 active:shadow-md flex items-center justify-center text-lg mt-2"
-                                >
-                                    <MapPin size={22} className="mr-2" />
-                                    Xóa Tọa Độ & Điểm Danh
-                                </button>
+                                <>
+                                    <button
+                                        onClick={handleCheckIn}
+                                        disabled={status === 'loading'}
+                                        className="w-full bg-slate-800 hover:bg-black disabled:bg-slate-300 disabled:text-slate-500 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl active:translate-y-0 active:shadow-md flex items-center justify-center text-lg mt-2"
+                                    >
+                                        <MapPin size={22} className="mr-2" />
+                                        Xóa Tọa Độ & Điểm Danh
+                                    </button>
+                                    <p className="text-center text-xs text-slate-400 mt-4 leading-relaxed">
+                                        * Nếu dùng iPhone, vui lòng đảm bảo đã bật <b>Dịch vụ định vị</b> cho trình duyệt Safari trong Cài đặt máy.
+                                    </p>
+                                </>
                             )}
                         </div>
                     </div>
