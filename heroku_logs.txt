@@ -1,0 +1,136 @@
+2026-03-02T11:36:42.777536+00:00 app[api]: Release v1 created by user 2411945@dlu.edu.vn
+2026-03-02T11:36:42.777536+00:00 app[api]: Initial release by user 2411945@dlu.edu.vn
+2026-03-02T11:36:43.027614+00:00 app[api]: Enable Logplex by user 2411945@dlu.edu.vn
+2026-03-02T11:36:43.027614+00:00 app[api]: Release v2 created by user 2411945@dlu.edu.vn
+2026-03-02T11:36:56.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:37:06.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/4c21dec1-ebc5-44b8-a884-4b76dcdaf93d
+2026-03-02T11:38:51.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:39:00.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/301a5c9d-e22d-4699-b3fd-1c0be3efac5b
+2026-03-02T11:41:04.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:41:13.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/64ed6f5b-f21c-46c3-9446-ee893062eb6c
+2026-03-02T11:43:11.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:43:20.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/7ea12811-4b04-4bc0-9f4f-d9f1db174552
+2026-03-02T11:43:55.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:44:04.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/0a0221fd-9d53-43c4-bcda-d3a09f2cc534
+2026-03-02T11:44:40.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:44:50.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/996e914b-5580-4ea6-8ba1-36a95f8c4a42
+2026-03-02T11:45:17.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:45:26.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/beea45b4-c5d8-492c-828f-2fdf98cf4d1c
+2026-03-02T11:45:44.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:45:52.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/98b6b6d8-7fcc-43a0-b75c-8c57cd957ff3
+2026-03-02T11:46:44.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:46:53.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/93733ac9-9874-4ca7-b9e0-22b7775ddf75
+2026-03-02T11:50:44.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:50:54.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/301edc61-e8c9-4044-aa13-9557579e9f21/activity/builds/0bbd3f24-760b-414f-b82e-ab18a6a14923
+2026-03-02T11:51:51.000000+00:00 app[api]: Build started by user 2411945@dlu.edu.vn
+2026-03-02T11:52:10.535175+00:00 app[api]: Release v3 created by user 2411945@dlu.edu.vn
+2026-03-02T11:52:10.535175+00:00 app[api]: Deploy 7d33ed79 by user 2411945@dlu.edu.vn
+2026-03-02T11:52:10.551369+00:00 app[api]: Scaled to web@1:Basic by user 2411945@dlu.edu.vn
+2026-03-02T11:52:11.000000+00:00 app[api]: Build succeeded
+2026-03-02T11:52:14.410898+00:00 heroku[web.1]: Starting process with command `npm start`
+2026-03-02T11:52:15.494047+00:00 app[web.1]: 
+2026-03-02T11:52:15.494060+00:00 app[web.1]: > backend@1.0.0 start
+2026-03-02T11:52:15.494061+00:00 app[web.1]: > node dist/index.js
+2026-03-02T11:52:15.494061+00:00 app[web.1]: 
+2026-03-02T11:52:15.833277+00:00 app[web.1]: [dotenv@17.3.1] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+2026-03-02T11:52:15.855290+00:00 app[web.1]: Server running on port 11611
+2026-03-02T11:52:16.025696+00:00 heroku[web.1]: State changed from starting to up
+2026-03-02T11:52:45.854147+00:00 app[web.1]: MongoDB connection error: MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017
+2026-03-02T11:52:45.854159+00:00 app[web.1]: at _handleConnectionErrors (/app/node_modules/mongoose/lib/connection.js:1169:11)
+2026-03-02T11:52:45.854160+00:00 app[web.1]: at NativeConnection.openUri (/app/node_modules/mongoose/lib/connection.js:1100:11) {
+2026-03-02T11:52:45.854161+00:00 app[web.1]: errorLabelSet: Set(0) {},
+2026-03-02T11:52:45.854161+00:00 app[web.1]: reason: TopologyDescription {
+2026-03-02T11:52:45.854163+00:00 app[web.1]: type: 'Unknown',
+2026-03-02T11:52:45.854164+00:00 app[web.1]: servers: Map(1) { 'localhost:27017' => [ServerDescription] },
+2026-03-02T11:52:45.854164+00:00 app[web.1]: stale: false,
+2026-03-02T11:52:45.854164+00:00 app[web.1]: compatible: true,
+2026-03-02T11:52:45.854165+00:00 app[web.1]: heartbeatFrequencyMS: 10000,
+2026-03-02T11:52:45.854165+00:00 app[web.1]: localThresholdMS: 15,
+2026-03-02T11:52:45.854166+00:00 app[web.1]: setName: null,
+2026-03-02T11:52:45.854166+00:00 app[web.1]: maxElectionId: null,
+2026-03-02T11:52:45.854166+00:00 app[web.1]: maxSetVersion: null,
+2026-03-02T11:52:45.854166+00:00 app[web.1]: commonWireVersion: 0,
+2026-03-02T11:52:45.854167+00:00 app[web.1]: logicalSessionTimeoutMinutes: null
+2026-03-02T11:52:45.854167+00:00 app[web.1]: },
+2026-03-02T11:52:45.854168+00:00 app[web.1]: code: undefined,
+2026-03-02T11:52:45.854168+00:00 app[web.1]: cause: TopologyDescription {
+2026-03-02T11:52:45.854168+00:00 app[web.1]: type: 'Unknown',
+2026-03-02T11:52:45.854168+00:00 app[web.1]: servers: Map(1) { 'localhost:27017' => [ServerDescription] },
+2026-03-02T11:52:45.854169+00:00 app[web.1]: stale: false,
+2026-03-02T11:52:45.854169+00:00 app[web.1]: compatible: true,
+2026-03-02T11:52:45.854169+00:00 app[web.1]: heartbeatFrequencyMS: 10000,
+2026-03-02T11:52:45.854169+00:00 app[web.1]: localThresholdMS: 15,
+2026-03-02T11:52:45.854169+00:00 app[web.1]: setName: null,
+2026-03-02T11:52:45.854169+00:00 app[web.1]: maxElectionId: null,
+2026-03-02T11:52:45.854170+00:00 app[web.1]: maxSetVersion: null,
+2026-03-02T11:52:45.854170+00:00 app[web.1]: commonWireVersion: 0,
+2026-03-02T11:52:45.854170+00:00 app[web.1]: logicalSessionTimeoutMinutes: null
+2026-03-02T11:52:45.854170+00:00 app[web.1]: }
+2026-03-02T11:52:45.854170+00:00 app[web.1]: }
+2026-03-02T12:04:20.880069+00:00 app[api]: Release v4 created by user 2411945@dlu.edu.vn
+2026-03-02T12:04:20.880069+00:00 app[api]: Set MONGODB_URI config vars by user 2411945@dlu.edu.vn
+2026-03-02T12:04:21.143454+00:00 heroku[web.1]: Restarting
+2026-03-02T12:04:21.145646+00:00 heroku[web.1]: State changed from up to starting
+2026-03-02T12:04:21.862031+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2026-03-02T12:04:21.960229+00:00 heroku[web.1]: Process exited with status 143
+2026-03-02T12:04:24.717037+00:00 heroku[web.1]: Starting process with command `npm start`
+2026-03-02T12:04:25.728916+00:00 app[web.1]: 
+2026-03-02T12:04:25.728942+00:00 app[web.1]: > backend@1.0.0 start
+2026-03-02T12:04:25.728943+00:00 app[web.1]: > node dist/index.js
+2026-03-02T12:04:25.728943+00:00 app[web.1]: 
+2026-03-02T12:04:26.065817+00:00 app[web.1]: [dotenv@17.3.1] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+2026-03-02T12:04:26.079788+00:00 app[web.1]: Server running on port 23206
+2026-03-02T12:04:26.593634+00:00 heroku[web.1]: State changed from starting to up
+2026-03-02T12:04:56.102240+00:00 app[web.1]: MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2026-03-02T12:04:56.102252+00:00 app[web.1]: at _handleConnectionErrors (/app/node_modules/mongoose/lib/connection.js:1169:11)
+2026-03-02T12:04:56.102253+00:00 app[web.1]: at NativeConnection.openUri (/app/node_modules/mongoose/lib/connection.js:1100:11) {
+2026-03-02T12:04:56.102253+00:00 app[web.1]: errorLabelSet: Set(0) {},
+2026-03-02T12:04:56.102254+00:00 app[web.1]: reason: TopologyDescription {
+2026-03-02T12:04:56.102254+00:00 app[web.1]: type: 'ReplicaSetNoPrimary',
+2026-03-02T12:04:56.102256+00:00 app[web.1]: servers: Map(3) {
+2026-03-02T12:04:56.102256+00:00 app[web.1]: 'ac-uegzyev-shard-00-00.vk78kab.mongodb.net:27017' => [ServerDescription],
+2026-03-02T12:04:56.102256+00:00 app[web.1]: 'ac-uegzyev-shard-00-01.vk78kab.mongodb.net:27017' => [ServerDescription],
+2026-03-02T12:04:56.102257+00:00 app[web.1]: 'ac-uegzyev-shard-00-02.vk78kab.mongodb.net:27017' => [ServerDescription]
+2026-03-02T12:04:56.102258+00:00 app[web.1]: },
+2026-03-02T12:04:56.102258+00:00 app[web.1]: stale: false,
+2026-03-02T12:04:56.102258+00:00 app[web.1]: compatible: true,
+2026-03-02T12:04:56.102258+00:00 app[web.1]: heartbeatFrequencyMS: 10000,
+2026-03-02T12:04:56.102258+00:00 app[web.1]: localThresholdMS: 15,
+2026-03-02T12:04:56.102259+00:00 app[web.1]: setName: 'atlas-127f3s-shard-0',
+2026-03-02T12:04:56.102259+00:00 app[web.1]: maxElectionId: null,
+2026-03-02T12:04:56.102259+00:00 app[web.1]: maxSetVersion: null,
+2026-03-02T12:04:56.102259+00:00 app[web.1]: commonWireVersion: 0,
+2026-03-02T12:04:56.102259+00:00 app[web.1]: logicalSessionTimeoutMinutes: null
+2026-03-02T12:04:56.102260+00:00 app[web.1]: },
+2026-03-02T12:04:56.102260+00:00 app[web.1]: code: undefined,
+2026-03-02T12:04:56.102260+00:00 app[web.1]: cause: TopologyDescription {
+2026-03-02T12:04:56.102260+00:00 app[web.1]: type: 'ReplicaSetNoPrimary',
+2026-03-02T12:04:56.102260+00:00 app[web.1]: servers: Map(3) {
+2026-03-02T12:04:56.102260+00:00 app[web.1]: 'ac-uegzyev-shard-00-00.vk78kab.mongodb.net:27017' => [ServerDescription],
+2026-03-02T12:04:56.102261+00:00 app[web.1]: 'ac-uegzyev-shard-00-01.vk78kab.mongodb.net:27017' => [ServerDescription],
+2026-03-02T12:04:56.102261+00:00 app[web.1]: 'ac-uegzyev-shard-00-02.vk78kab.mongodb.net:27017' => [ServerDescription]
+2026-03-02T12:04:56.102261+00:00 app[web.1]: },
+2026-03-02T12:04:56.102261+00:00 app[web.1]: stale: false,
+2026-03-02T12:04:56.102261+00:00 app[web.1]: compatible: true,
+2026-03-02T12:04:56.102261+00:00 app[web.1]: heartbeatFrequencyMS: 10000,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: localThresholdMS: 15,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: setName: 'atlas-127f3s-shard-0',
+2026-03-02T12:04:56.102262+00:00 app[web.1]: maxElectionId: null,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: maxSetVersion: null,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: commonWireVersion: 0,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: logicalSessionTimeoutMinutes: null
+2026-03-02T12:04:56.102262+00:00 app[web.1]: }
+2026-03-02T12:04:56.102263+00:00 app[web.1]: }
+2026-03-02T12:32:18.363552+00:00 app[web.1]: Error creating session: MongooseError: Operation `sessions.insertOne()` buffering timed out after 10000ms
+2026-03-02T12:32:18.363567+00:00 app[web.1]: at Timeout._onTimeout (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:131:25)
+2026-03-02T12:32:18.363568+00:00 app[web.1]: at listOnTimeout (node:internal/timers:605:17)
+2026-03-02T12:32:18.363569+00:00 app[web.1]: at process.processTimers (node:internal/timers:541:7)
+2026-03-02T12:32:18.366522+00:00 heroku[router]: at=info method=POST path="/admin/session" host=dlu-attendance-api-e099080339e4.herokuapp.com request_id=5f2c00c4-3a95-d64d-63da-8b174e2bc911 fwd="123.31.185.53" dyno=web.1 connect=0ms service=10024ms status=500 bytes=35 protocol=http1.1 tls=true tls_version=unknown
+2026-03-02T12:35:01.352746+00:00 app[web.1]: Error creating session: MongooseError: Operation `sessions.insertOne()` buffering timed out after 10000ms
+2026-03-02T12:35:01.352759+00:00 app[web.1]: at Timeout._onTimeout (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:131:25)
+2026-03-02T12:35:01.352760+00:00 app[web.1]: at listOnTimeout (node:internal/timers:605:17)
+2026-03-02T12:35:01.352761+00:00 app[web.1]: at process.processTimers (node:internal/timers:541:7)
+2026-03-02T12:35:01.353485+00:00 heroku[router]: at=info method=POST path="/admin/session" host=dlu-attendance-api-e099080339e4.herokuapp.com request_id=b055db9d-41d1-c16c-5cc5-bca16fbb01dc fwd="123.31.185.53" dyno=web.1 connect=0ms service=10005ms status=500 bytes=35 protocol=http1.1 tls=true tls_version=unknown
+2026-03-02T12:39:07.716936+00:00 app[api]: Log session created by user 2411945@dlu.edu.vn
+2026-03-02T12:39:20.017736+00:00 app[api]: Log session created by user 2411945@dlu.edu.vn
+2026-03-02T12:51:26.447908+00:00 app[api]: Log session created by user 2411945@dlu.edu.vn

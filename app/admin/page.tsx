@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, Clock, PlayCircle, RefreshCw } from 'lucide-react';
+import { Users, Clock, PlayCircle, RefreshCw, Copy, Download } from 'lucide-react';
 
 interface AttendanceRecord {
     _id: string;
@@ -76,6 +76,41 @@ export default function AdminPage() {
         return `${m}:${s < 10 ? '0' : ''}${s}`;
     };
 
+    const copyToClipboard = () => {
+        if (attendances.length === 0) {
+            alert("Chưa có danh sách để copy!");
+            return;
+        }
+        let tsvContent = "STT\tEmail\tThời gian điểm danh\n";
+        attendances.forEach((att, index) => {
+            const time = new Date(att.timestamp).toLocaleTimeString('vi-VN');
+            tsvContent += `${index + 1}\t${att.email}\t${time}\n`;
+        });
+        navigator.clipboard.writeText(tsvContent)
+            .then(() => alert('✅ Đã copy! Bây giờ bạn hãy mở Google Sheets và nhấn Ctrl+V (hoặc Cmd+V) để dán bảng dữ liệu.'))
+            .catch(() => alert('❌ Trình duyệt không hỗ trợ tự động copy. Vui lòng thử dùng nút Tải CSV nhé!'));
+    };
+
+    const downloadCSV = () => {
+        if (attendances.length === 0) {
+            alert("Chưa có danh sách để tải!");
+            return;
+        }
+        let csvContent = "STT,Email,Thoi gian diem danh\n";
+        attendances.forEach((att, index) => {
+            const time = new Date(att.timestamp).toLocaleTimeString('vi-VN');
+            csvContent += `${index + 1},${att.email},${time}\n`;
+        });
+        const blob = new Blob(["\ufeff" + csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", `DiemDanh_${sessionCode}_${new Date().toLocaleDateString('vi-VN').replace(/\//g, '-')}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
         <main className="min-h-screen bg-slate-50 p-6 md:p-12">
             <div className="max-w-5xl mx-auto space-y-8">
@@ -130,8 +165,14 @@ export default function AdminPage() {
                                 </div>
                                 <div className="bg-slate-100 text-slate-700 font-black text-xl px-5 py-2 rounded-xl flex items-center shadow-inner">
                                     {attendances.length}
-                                    <button onClick={fetchAttendances} className="ml-3 hover:bg-white p-1.5 rounded-lg transition shadow-sm border border-transparent hover:border-slate-200">
+                                    <button onClick={fetchAttendances} title="Làm mới" className="ml-3 hover:bg-white p-1.5 rounded-lg transition shadow-sm border border-transparent hover:border-slate-200">
                                         <RefreshCw size={18} className="text-blue-600" />
+                                    </button>
+                                    <button onClick={copyToClipboard} title="Copy để dán trực tiếp vào Google Sheets" className="ml-2 hover:bg-white p-1.5 rounded-lg transition shadow-sm border border-transparent hover:border-slate-200">
+                                        <Copy size={18} className="text-emerald-600" />
+                                    </button>
+                                    <button onClick={downloadCSV} title="Tải file CSV" className="ml-2 hover:bg-white p-1.5 rounded-lg transition shadow-sm border border-transparent hover:border-slate-200">
+                                        <Download size={18} className="text-purple-600" />
                                     </button>
                                 </div>
                             </div>

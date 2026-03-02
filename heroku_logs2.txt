@@ -1,0 +1,50 @@
+2026-03-02T12:04:56.102259+00:00 app[web.1]: setName: 'atlas-127f3s-shard-0',
+2026-03-02T12:04:56.102259+00:00 app[web.1]: maxElectionId: null,
+2026-03-02T12:04:56.102259+00:00 app[web.1]: maxSetVersion: null,
+2026-03-02T12:04:56.102259+00:00 app[web.1]: commonWireVersion: 0,
+2026-03-02T12:04:56.102259+00:00 app[web.1]: logicalSessionTimeoutMinutes: null
+2026-03-02T12:04:56.102260+00:00 app[web.1]: },
+2026-03-02T12:04:56.102260+00:00 app[web.1]: code: undefined,
+2026-03-02T12:04:56.102260+00:00 app[web.1]: cause: TopologyDescription {
+2026-03-02T12:04:56.102260+00:00 app[web.1]: type: 'ReplicaSetNoPrimary',
+2026-03-02T12:04:56.102260+00:00 app[web.1]: servers: Map(3) {
+2026-03-02T12:04:56.102260+00:00 app[web.1]: 'ac-uegzyev-shard-00-00.vk78kab.mongodb.net:27017' => [ServerDescription],
+2026-03-02T12:04:56.102261+00:00 app[web.1]: 'ac-uegzyev-shard-00-01.vk78kab.mongodb.net:27017' => [ServerDescription],
+2026-03-02T12:04:56.102261+00:00 app[web.1]: 'ac-uegzyev-shard-00-02.vk78kab.mongodb.net:27017' => [ServerDescription]
+2026-03-02T12:04:56.102261+00:00 app[web.1]: },
+2026-03-02T12:04:56.102261+00:00 app[web.1]: stale: false,
+2026-03-02T12:04:56.102261+00:00 app[web.1]: compatible: true,
+2026-03-02T12:04:56.102261+00:00 app[web.1]: heartbeatFrequencyMS: 10000,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: localThresholdMS: 15,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: setName: 'atlas-127f3s-shard-0',
+2026-03-02T12:04:56.102262+00:00 app[web.1]: maxElectionId: null,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: maxSetVersion: null,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: commonWireVersion: 0,
+2026-03-02T12:04:56.102262+00:00 app[web.1]: logicalSessionTimeoutMinutes: null
+2026-03-02T12:04:56.102262+00:00 app[web.1]: }
+2026-03-02T12:04:56.102263+00:00 app[web.1]: }
+2026-03-02T12:32:18.363552+00:00 app[web.1]: Error creating session: MongooseError: Operation `sessions.insertOne()` buffering timed out after 10000ms
+2026-03-02T12:32:18.363567+00:00 app[web.1]: at Timeout._onTimeout (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:131:25)
+2026-03-02T12:32:18.363568+00:00 app[web.1]: at listOnTimeout (node:internal/timers:605:17)
+2026-03-02T12:32:18.363569+00:00 app[web.1]: at process.processTimers (node:internal/timers:541:7)
+2026-03-02T12:32:18.366522+00:00 heroku[router]: at=info method=POST path="/admin/session" host=dlu-attendance-api-e099080339e4.herokuapp.com request_id=5f2c00c4-3a95-d64d-63da-8b174e2bc911 fwd="123.31.185.53" dyno=web.1 connect=0ms service=10024ms status=500 bytes=35 protocol=http1.1 tls=true tls_version=unknown
+2026-03-02T12:35:01.352746+00:00 app[web.1]: Error creating session: MongooseError: Operation `sessions.insertOne()` buffering timed out after 10000ms
+2026-03-02T12:35:01.352759+00:00 app[web.1]: at Timeout._onTimeout (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:131:25)
+2026-03-02T12:35:01.352760+00:00 app[web.1]: at listOnTimeout (node:internal/timers:605:17)
+2026-03-02T12:35:01.352761+00:00 app[web.1]: at process.processTimers (node:internal/timers:541:7)
+2026-03-02T12:35:01.353485+00:00 heroku[router]: at=info method=POST path="/admin/session" host=dlu-attendance-api-e099080339e4.herokuapp.com request_id=b055db9d-41d1-c16c-5cc5-bca16fbb01dc fwd="123.31.185.53" dyno=web.1 connect=0ms service=10005ms status=500 bytes=35 protocol=http1.1 tls=true tls_version=unknown
+2026-03-02T12:39:07.716936+00:00 app[api]: Log session created by user 2411945@dlu.edu.vn
+2026-03-02T12:39:20.017736+00:00 app[api]: Log session created by user 2411945@dlu.edu.vn
+2026-03-02T12:51:26.447908+00:00 app[api]: Log session created by user 2411945@dlu.edu.vn
+2026-03-02T12:52:53.652829+00:00 app[api]: Log session created by user 2411945@dlu.edu.vn
+2026-03-02T13:29:46.465291+00:00 app[web.1]: Error creating session: MongooseError: Operation `sessions.insertOne()` buffering timed out after 10000ms
+2026-03-02T13:29:46.465304+00:00 app[web.1]: at Timeout._onTimeout (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:131:25)
+2026-03-02T13:29:46.465306+00:00 app[web.1]: at listOnTimeout (node:internal/timers:605:17)
+2026-03-02T13:29:46.465307+00:00 app[web.1]: at process.processTimers (node:internal/timers:541:7)
+2026-03-02T13:29:46.466157+00:00 heroku[router]: at=info method=POST path="/admin/session" host=dlu-attendance-api-e099080339e4.herokuapp.com request_id=fa348f3f-d4fa-445d-e059-57a66488b512 fwd="123.31.185.53" dyno=web.1 connect=0ms service=10005ms status=500 bytes=35 protocol=http1.1 tls=true tls_version=unknown
+2026-03-02T13:29:59.188752+00:00 app[web.1]: Error creating session: MongooseError: Operation `sessions.insertOne()` buffering timed out after 10000ms
+2026-03-02T13:29:59.188771+00:00 app[web.1]: at Timeout._onTimeout (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:131:25)
+2026-03-02T13:29:59.188774+00:00 app[web.1]: at listOnTimeout (node:internal/timers:605:17)
+2026-03-02T13:29:59.188774+00:00 app[web.1]: at process.processTimers (node:internal/timers:541:7)
+2026-03-02T13:29:59.189377+00:00 heroku[router]: at=info method=POST path="/admin/session" host=dlu-attendance-api-e099080339e4.herokuapp.com request_id=b86e7c38-77c2-bebe-7002-96e78e027f64 fwd="123.31.185.53" dyno=web.1 connect=0ms service=10006ms status=500 bytes=35 protocol=http1.1 tls=true tls_version=unknown
+2026-03-02T13:31:14.020734+00:00 app[api]: Log session created by user 2411945@dlu.edu.vn
