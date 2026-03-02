@@ -17,6 +17,7 @@ function parseJwt(token: string) {
 
 export default function StudentPage() {
     const [email, setEmail] = useState<string | null>(null);
+    const [editableEmail, setEditableEmail] = useState<string>('');
     const [sessionCode, setSessionCode] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
@@ -49,6 +50,7 @@ export default function StudentPage() {
                 return;
             }
             setEmail(payload.email);
+            setEditableEmail(payload.email); // prefill editable field
             setStatus('idle');
             setMessage('');
         }
@@ -94,7 +96,7 @@ export default function StudentPage() {
                     code: sessionCode,
                     lat,
                     lon,
-                    email,
+                    email: editableEmail,
                     deviceId
                 });
 
@@ -149,8 +151,14 @@ export default function StudentPage() {
                 ) : (
                     <div className="space-y-8">
                         <div className="bg-emerald-50 text-emerald-800 p-4 rounded-xl text-sm flex items-center justify-between shadow-sm border border-emerald-100">
-                            <span className="font-semibold truncate mr-2">{email}</span>
-                            <CheckCircle size={20} className="text-emerald-500 shrink-0" />
+                            <input
+                                type="email"
+                                value={editableEmail}
+                                onChange={(e) => setEditableEmail(e.target.value)}
+                                className="w-full text-center text-2xl font-medium py-2 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition outline-none"
+                                placeholder="email@dlu.edu.vn"
+                            />
+                            <CheckCircle size={20} className="text-emerald-500 shrink-0 mt-2" />
                         </div>
 
                         <div className="space-y-6">
