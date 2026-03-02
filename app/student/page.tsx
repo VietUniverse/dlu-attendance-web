@@ -22,6 +22,7 @@ export default function StudentPage() {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
     const [deviceId, setDeviceId] = useState<string | null>(null);
+    const [currentCoord, setCurrentCoord] = useState<{ lat: number, lon: number } | null>(null);
 
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -89,6 +90,7 @@ export default function StudentPage() {
             try {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
+                setCurrentCoord({ lat, lon });
 
                 setMessage('Đang kiểm duyệt dữ liệu bảo mật lên máy chủ...');
 
@@ -210,6 +212,14 @@ export default function StudentPage() {
                                         * Nếu dùng iPhone, vui lòng đảm bảo đã bật <b>Dịch vụ định vị</b> cho trình duyệt Safari trong Cài đặt máy.
                                     </p>
                                 </>
+                            )}
+
+                            {currentCoord && (
+                                <div className="mt-4 p-4 bg-slate-100 rounded-xl border border-slate-200 text-xs text-slate-500 font-mono flex flex-col items-center">
+                                    <span className="font-bold text-slate-600 mb-1">📍 Tọa độ hiện tại của bạn:</span>
+                                    <span>Lat: {currentCoord.lat}</span>
+                                    <span>Lon: {currentCoord.lon}</span>
+                                </div>
                             )}
                         </div>
                     </div>
