@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, Clock, PlayCircle, RefreshCw, Copy, Download, History, UserMinus, PlusCircle } from 'lucide-react';
+import { Users, Clock, PlayCircle, RefreshCw, Copy, Download, History, UserMinus, PlusCircle, Trash2 } from 'lucide-react';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 
 interface AttendanceRecord {
@@ -123,6 +123,25 @@ export default function AdminPage() {
             fetchAttendances(code);
         } catch (error: any) {
             alert(error.response?.data?.message || 'Lỗi thêm thủ công');
+        }
+    };
+
+    const handleDeleteSession = async (code: string, _id: string, e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent triggering the row click
+        if (window.confirm(`Bạn có chắc chắn muốn xóa phiên điểm danh [${code}] và TOÀN BỘ dữ liệu của phiên này không?`)) {
+            try {
+                await axios.delete(`${API_URL}/admin/session/${code}`);
+                setHistory(history.filter(h => h._id !== _id));
+                if (sessionCode === code || viewingHistory?.code === code) {
+                    setSessionCode(null);
+                    setViewingHistory(null);
+                    setAttendances([]);
+                    setAbsences([]);
+                    setTimeLeft(0);
+                }
+            } catch (error) {
+                alert('Lỗi xóa session');
+            }
         }
     };
 
@@ -308,14 +327,23 @@ export default function AdminPage() {
                                                 setTimeLeft(0);
                                                 fetchAttendances(h.code);
                                             }}
-                                            className="p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-blue-50 cursor-pointer transition flex items-center justify-between"
+                                            className="p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-blue-50 cursor-pointer transition flex items-center justify-between group"
                                         >
-                                            <div className="overflow-hidden">
+                                            <div className="overflow-hidden flex-1 pr-2">
                                                 <div className="font-bold text-slate-700 truncate">{h.title}</div>
                                                 <div className="text-xs text-slate-500">{new Date(h.createdAt).toLocaleString('vi-VN')}</div>
                                             </div>
-                                            <div className="font-mono text-xs font-bold text-blue-600 bg-white px-2 py-1 rounded-md shadow-sm border border-slate-200 ml-2">
-                                                {h.code}
+                                            <div className="flex items-center">
+                                                <div className="font-mono text-xs font-bold text-blue-600 bg-white px-2 py-1 rounded-md shadow-sm border border-slate-200">
+                                                    {h.code}
+                                                </div>
+                                                <button
+                                                    onClick={(e) => handleDeleteSession(h.code, h._id, e)}
+                                                    title="Xóa phiên điểm danh này"
+                                                    className="ml-2 p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition opacity-0 group-hover:opacity-100"
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
                                             </div>
                                         </div>
                                     ))
