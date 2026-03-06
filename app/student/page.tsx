@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import axios from 'axios';
 import { MapPin, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
-import fpPromise from '@fingerprintjs/fingerprintjs';
 
 function parseJwt(token: string) {
     var base64Url = token.split('.')[1];
@@ -21,26 +20,9 @@ export default function StudentPage() {
     const [sessionCode, setSessionCode] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
-    const [deviceId, setDeviceId] = useState<string | null>(null);
     const [currentCoord, setCurrentCoord] = useState<{ lat: number, lon: number } | null>(null);
 
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
-    // Initialize FingerprintJS
-    useEffect(() => {
-        const getFingerprint = async () => {
-            const fp = await fpPromise.load();
-            const result = await fp.get();
-            // Store fingerprint in localstorage as fallback and state
-            let storedId = localStorage.getItem('dlu_device_id');
-            if (!storedId) {
-                storedId = result.visitorId;
-                localStorage.setItem('dlu_device_id', storedId);
-            }
-            setDeviceId(storedId);
-        };
-        getFingerprint();
-    }, []);
 
     const handleLoginSuccess = (credentialResponse: CredentialResponse) => {
         if (credentialResponse.credential) {
@@ -61,12 +43,6 @@ export default function StudentPage() {
         if (!sessionCode || sessionCode.length !== 6) {
             setStatus('error');
             setMessage('Mã phiên điểm danh phải gồm 6 chữ số');
-            return;
-        }
-
-        if (!deviceId) {
-            setStatus('error');
-            setMessage('Đang nhận dạng thiết bị, vui lòng thử lại sau vài giây...');
             return;
         }
 
@@ -95,11 +71,10 @@ export default function StudentPage() {
                 setMessage('Đang kiểm duyệt dữ liệu bảo mật lên máy chủ...');
 
                 const res = await axios.post(`${API_URL}/attendance`, {
-                    code: sessionCode,
+                    code: sessionCode, // Pass sessionCode dynamically
                     lat,
                     lon,
-                    email: editableEmail,
-                    deviceId
+                    email: editableEmail
                 });
 
                 setStatus('success');
