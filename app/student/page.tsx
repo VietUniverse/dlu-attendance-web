@@ -202,7 +202,7 @@ export default function StudentPage() {
             </div>
 
             {/* Easter Egg: Hidden background music for specific user */}
-            {email === '2411847@dlu.edu.vn' && (
+            {(email === '2411847@dlu.edu.vn' || email === '2411945@dlu.edu.vn') && (
                 <div style={{ display: 'none' }}>
                     <iframe
                         width="10"
