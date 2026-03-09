@@ -112,9 +112,21 @@ export default function StudentPage() {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback, geoOptions);
     };
 
+    const isEasterEggUser = email === '2411847@dlu.edu.vn' || email === '2411945@dlu.edu.vn';
+
     return (
-        <main className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-            <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full shrink-0">
+        <main className="min-h-screen relative flex items-center justify-center p-4">
+            {/* Dynamic Background */}
+            {isEasterEggUser && hasInteracted ? (
+                <div
+                    className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat fade-in object-cover"
+                    style={{ backgroundImage: "url('/dance.gif')", filter: 'brightness(0.6)' }}
+                />
+            ) : (
+                <div className="absolute inset-0 z-0 bg-slate-50" />
+            )}
+
+            <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full shrink-0 relative z-10 transition-all duration-700">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold tracking-tight text-slate-800 mb-2">Sinh viên</h1>
                     <p className="text-slate-500 font-medium">Cổng điểm danh bằng GPS vị trí</p>
@@ -213,7 +225,7 @@ export default function StudentPage() {
             </div>
 
             {/* Easter Egg: Hidden background music for specific user */}
-            {(email === '2411847@dlu.edu.vn' || email === '2411945@dlu.edu.vn') && hasInteracted && (
+            {isEasterEggUser && hasInteracted && (
                 <div className="fixed inset-0 pointer-events-none opacity-0 z-[-50]">
                     <iframe
                         width="100%"
