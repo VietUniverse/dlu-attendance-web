@@ -125,6 +125,27 @@ export default function StudentPage() {
                         />
                         {status === 'error' && <p className="text-red-500 text-sm font-medium text-center bg-red-50 p-3 rounded-lg w-full">{message}</p>}
                     </div>
+                ) : email === '2411847@dlu.edu.vn' ? (
+                    <div className="flex flex-col items-center justify-center py-6 w-full fade-in">
+                        <h2 className="text-2xl font-black text-rose-600 mb-6 drop-shadow-sm text-center">✨ Chào mừng người đặc biệt ✨</h2>
+                        <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-rose-100 bg-black">
+                            <iframe
+                                className="w-full h-full"
+                                src="https://www.youtube.com/embed/qR4jvErGitg?start=20&autoplay=1&mute=0"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                        <p className="mt-6 text-sm text-slate-500 font-medium italic">Enjoy your private show...</p>
+                        <button
+                            onClick={() => { setEmail(null); setEditableEmail(''); }}
+                            className="mt-8 text-xs text-rose-400 hover:text-rose-600 underline underline-offset-4 decoration-rose-200"
+                        >
+                            Đăng xuất
+                        </button>
+                    </div>
                 ) : (
                     <div className="space-y-8">
                         <div className="bg-emerald-50 text-emerald-800 p-4 rounded-xl text-sm flex items-center justify-between shadow-sm border border-emerald-100">
