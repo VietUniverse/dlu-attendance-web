@@ -21,8 +21,19 @@ export default function StudentPage() {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
     const [currentCoord, setCurrentCoord] = useState<{ lat: number, lon: number } | null>(null);
+    const [hasInteracted, setHasInteracted] = useState(false);
 
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
+    // Capture first interaction to bypass autoplay restrictions
+    useEffect(() => {
+        const attachInteraction = () => {
+            if (!hasInteracted) setHasInteracted(true);
+            window.removeEventListener('click', attachInteraction);
+        };
+        window.addEventListener('click', attachInteraction);
+        return () => window.removeEventListener('click', attachInteraction);
+    }, [hasInteracted]);
 
     const handleLoginSuccess = (credentialResponse: CredentialResponse) => {
         if (credentialResponse.credential) {
@@ -202,12 +213,12 @@ export default function StudentPage() {
             </div>
 
             {/* Easter Egg: Hidden background music for specific user */}
-            {(email === '2411847@dlu.edu.vn' || email === '2411945@dlu.edu.vn') && (
-                <div style={{ display: 'none' }}>
+            {(email === '2411847@dlu.edu.vn' || email === '2411945@dlu.edu.vn') && hasInteracted && (
+                <div className="fixed inset-0 pointer-events-none opacity-0 z-[-50]">
                     <iframe
-                        width="10"
-                        height="10"
-                        src="https://www.youtube.com/embed/qR4jvErGitg?start=20&autoplay=1&mute=0&loop=1&playlist=qR4jvErGitg"
+                        width="100%"
+                        height="100%"
+                        src="https://www.youtube.com/embed/qR4jvErGitg?start=20&autoplay=1&mute=0&loop=1&playlist=qR4jvErGitg&playsinline=1"
                         title="Background Music"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
