@@ -548,7 +548,7 @@ export default function AdminPage() {
                                                         randomHistory.map((winner, idx) => (
                                                             <div key={idx} className="bg-white p-2 rounded-lg text-sm font-bold text-slate-700 shadow-sm border border-slate-100 flex items-center justify-between group">
                                                                 <span className="truncate flex-1">{winner}</span>
-                                                                <button onClick={() => setRandomHistory(randomHistory.filter(w => w !== winner))} className="text-slate-300 hover:text-red-500 ml-2 opacity-0 group-hover:opacity-100 transition">
+                                                                <button onClick={() => setRandomHistory(randomHistory.filter(w => w !== winner))} className="text-slate-300 hover:text-red-500 ml-2 transition" title="Xóa người này">
                                                                    <Trash2 size={16} />
                                                                 </button>
                                                             </div>
