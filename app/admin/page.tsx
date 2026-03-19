@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, Clock, PlayCircle, RefreshCw, Copy, Download, History, UserMinus, PlusCircle, Trash2 } from 'lucide-react';
+import { Users, Clock, PlayCircle, RefreshCw, Copy, Download, History, UserMinus, PlusCircle, Trash2, Gift } from 'lucide-react';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import dynamic from 'next/dynamic';
+
+const Wheel = dynamic(() => import('react-custom-roulette').then(mod => mod.Wheel), { ssr: false });
 
 interface AttendanceRecord {
     _id: string;
@@ -46,8 +49,16 @@ export default function AdminPage() {
 
     const [loading, setLoading] = useState(false);
     const [timeLeft, setTimeLeft] = useState<number>(0);
-    const [activeTab, setActiveTab] = useState<'attendants' | 'absences'>('attendants');
+    const [activeTab, setActiveTab] = useState<'attendants' | 'absences' | 'random'>('attendants');
     const [manualMssv, setManualMssv] = useState('');
+
+    // Random Wheel state
+    const [randomHistory, setRandomHistory] = useState<string[]>([]);
+    const [mustSpin, setMustSpin] = useState(false);
+    const [prizeNumber, setPrizeNumber] = useState(0);
+    const [spinAmount, setSpinAmount] = useState(1);
+    const [spinsLeft, setSpinsLeft] = useState(0);
+    const [manualWinner, setManualWinner] = useState('');
 
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -143,6 +154,54 @@ export default function AdminPage() {
                 alert('Lỗi xóa session');
             }
         }
+    };
+
+    // RANDOM WHEEL LOGIC
+    const availableOptions = [
+        ...attendances.map(a => a.email),
+        "Cao Nguyên Hoàng"
+    ].filter(name => !randomHistory.includes(name));
+
+    const wheelData = availableOptions.length > 0
+        ? availableOptions.map(opt => ({ option: opt.length > 20 ? opt.substring(0, 17) + '...' : opt }))
+        : [{ option: 'Trống' }];
+
+    const handleSpinClick = () => {
+        if (mustSpin || spinsLeft > 0 || spinAmount < 1 || availableOptions.length === 0) return;
+        setSpinsLeft(spinAmount);
+    };
+
+    useEffect(() => {
+        if (spinsLeft > 0 && !mustSpin && availableOptions.length > 0) {
+            const newPrizeNumber = Math.floor(Math.random() * availableOptions.length);
+            setPrizeNumber(newPrizeNumber);
+            setMustSpin(true);
+        }
+    }, [spinsLeft, mustSpin, availableOptions.length]);
+
+    const handleStopSpinning = () => {
+        setMustSpin(false);
+        const winner = availableOptions[prizeNumber];
+        if (winner) {
+            setRandomHistory(prev => [...prev, winner]);
+        }
+        
+        const nextSpinsLeft = spinsLeft - 1;
+        if (nextSpinsLeft > 0 && availableOptions.length > 1) { // >1 because one was just removed
+            setTimeout(() => {
+                setSpinsLeft(nextSpinsLeft);
+            }, 3000); // 3 seconds delay before next spin
+        } else {
+            setSpinsLeft(0);
+        }
+    };
+
+    const handleManualWinnerAdd = () => {
+        if (!manualWinner.trim()) return;
+        if (!randomHistory.includes(manualWinner.trim())) {
+            setRandomHistory([...randomHistory, manualWinner.trim()]);
+        }
+        setManualWinner('');
     };
 
     useEffect(() => {
@@ -370,6 +429,12 @@ export default function AdminPage() {
                                         >
                                             <UserMinus size={18} className="mr-2" /> Vắng mặt ({absences.length})
                                         </button>
+                                        <button
+                                            onClick={() => setActiveTab('random')}
+                                            className={`flex items-center font-bold px-4 py-2 rounded-xl transition ${activeTab === 'random' ? 'bg-purple-100 text-purple-700' : 'text-slate-500 hover:bg-slate-100'}`}
+                                        >
+                                            <Gift size={18} className="mr-2" /> Vòng quay
+                                        </button>
                                     </div>
 
                                     <div className="bg-slate-100 text-slate-700 font-black px-3 py-1.5 rounded-xl flex items-center shadow-inner">
@@ -425,26 +490,118 @@ export default function AdminPage() {
                                             ))
                                         )
                                     )}
+
+                                    {activeTab === 'random' && (
+                                        <div className="flex flex-col md:flex-row gap-6 h-[460px]">
+                                            {/* Wheel Section */}
+                                            <div className="flex-1 flex flex-col items-center justify-center bg-slate-50 rounded-2xl p-4 border border-slate-100 overflow-hidden">
+                                                <div className="mb-4 flex items-center gap-3">
+                                                    <label className="font-bold text-slate-700">Số lượng cờ quay:</label>
+                                                    <input 
+                                                        type="number" 
+                                                        min="1" 
+                                                        value={spinAmount} 
+                                                        onChange={e => setSpinAmount(Math.max(1, parseInt(e.target.value) || 1))} 
+                                                        disabled={mustSpin || spinsLeft > 0}
+                                                        className="border-2 border-slate-200 rounded-lg px-3 py-1.5 w-20 text-center font-bold text-lg focus:border-purple-500 focus:outline-none"
+                                                    />
+                                                </div>
+                                                <div className="w-full max-w-[280px] aspect-square flex items-center justify-center mb-6 pointer-events-none">
+                                                   <Wheel
+                                                        mustStartSpinning={mustSpin}
+                                                        prizeNumber={prizeNumber}
+                                                        data={wheelData}
+                                                        onStopSpinning={handleStopSpinning}
+                                                        backgroundColors={['#3e3e3e', '#df3428', '#3498db', '#f1c40f', '#2ecc71', '#9b59b6']}
+                                                        textColors={['#ffffff']}
+                                                        outerBorderColor="#eeeeee"
+                                                        outerBorderWidth={5}
+                                                        innerRadius={15}
+                                                        innerBorderColor="#30261a"
+                                                        innerBorderWidth={0}
+                                                        radiusLineColor="#eeeeee"
+                                                        radiusLineWidth={1}
+                                                        fontSize={16}
+                                                    />
+                                                </div>
+                                                <button
+                                                    onClick={handleSpinClick}
+                                                    disabled={mustSpin || spinsLeft > 0 || availableOptions.length === 0}
+                                                    className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:from-slate-300 disabled:to-slate-400 text-white font-black text-xl px-12 py-3 rounded-2xl shadow-lg transform transition hover:scale-105 active:scale-95 disabled:scale-100 disabled:cursor-not-allowed uppercase"
+                                                >
+                                                    {spinsLeft > 0 ? `ĐANG QUAY... (${spinsLeft})` : 'QUAY NGAY!'}
+                                                </button>
+                                                {availableOptions.length === 0 && (
+                                                    <p className="text-red-500 text-sm mt-3 font-medium">Hết người để quay!</p>
+                                                )}
+                                            </div>
+
+                                            {/* Winners List */}
+                                            <div className="w-full md:w-1/3 flex flex-col border border-slate-100 rounded-2xl overflow-hidden bg-slate-50">
+                                                <div className="bg-gradient-to-r from-purple-100 to-indigo-100 text-indigo-900 p-3 font-black text-center border-b border-indigo-200">
+                                                    Danh sách Trúng Thưởng ({randomHistory.length})
+                                                </div>
+                                                <div className="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar min-h-[150px]">
+                                                    {randomHistory.length === 0 ? (
+                                                        <div className="text-center text-slate-400 mt-10 italic text-sm">Chưa có ai trúng thưởng</div>
+                                                    ) : (
+                                                        randomHistory.map((winner, idx) => (
+                                                            <div key={idx} className="bg-white p-2 rounded-lg text-sm font-bold text-slate-700 shadow-sm border border-slate-100 flex items-center justify-between group">
+                                                                <span className="truncate flex-1">{winner}</span>
+                                                                <button onClick={() => setRandomHistory(randomHistory.filter(w => w !== winner))} className="text-slate-300 hover:text-red-500 ml-2 opacity-0 group-hover:opacity-100 transition">
+                                                                   <Trash2 size={16} />
+                                                                </button>
+                                                            </div>
+                                                        ))
+                                                    )}
+                                                </div>
+                                                <div className="p-3 border-t border-slate-200 bg-white flex gap-2">
+                                                    <input 
+                                                        type="text" 
+                                                        value={manualWinner}
+                                                        onChange={e => setManualWinner(e.target.value)}
+                                                        placeholder="Nhập tay..."
+                                                        className="flex-1 border border-slate-200 rounded-lg px-2 py-1.5 text-sm focus:border-purple-500 focus:outline-none font-medium"
+                                                    />
+                                                    <button 
+                                                        onClick={handleManualWinnerAdd}
+                                                        disabled={!manualWinner.trim()}
+                                                        className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white p-1.5 rounded-lg transition"
+                                                    >
+                                                        <PlusCircle size={18} />
+                                                    </button>
+                                                </div>
+                                                <button 
+                                                    onClick={() => {if(window.confirm('Xóa hết DS trúng thưởng?')) setRandomHistory([])}}
+                                                    className="w-full bg-slate-200 hover:bg-red-100 hover:text-red-600 text-slate-500 py-2 text-xs font-bold transition"
+                                                >
+                                                    Làm mới DS Trúng Thưởng
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Manual Action */}
-                                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-3">
-                                    <input
-                                        type="text"
-                                        placeholder="Nhập MSSV điểm danh tay..."
-                                        value={manualMssv}
-                                        onChange={e => setManualMssv(e.target.value)}
-                                        className="w-full sm:w-auto flex-1 border-2 border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-emerald-500 font-medium font-mono text-sm"
-                                    />
-                                    <button
-                                        onClick={handleManualAdd}
-                                        disabled={!manualMssv.trim()}
-                                        className="w-full sm:w-auto flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white px-6 py-2.5 rounded-xl font-bold transition shadow-md shadow-emerald-600/20"
-                                    >
-                                        <PlusCircle size={18} className="mr-2" />
-                                        Thêm bổ sung
-                                    </button>
-                                </div>
+                                {activeTab !== 'random' && (
+                                    <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-3">
+                                        <input
+                                            type="text"
+                                            placeholder="Nhập MSSV điểm danh tay..."
+                                            value={manualMssv}
+                                            onChange={e => setManualMssv(e.target.value)}
+                                            className="w-full sm:w-auto flex-1 border-2 border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-emerald-500 font-medium font-mono text-sm"
+                                        />
+                                        <button
+                                            onClick={handleManualAdd}
+                                            disabled={!manualMssv.trim()}
+                                            className="w-full sm:w-auto flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white px-6 py-2.5 rounded-xl font-bold transition shadow-md shadow-emerald-600/20"
+                                        >
+                                            <PlusCircle size={18} className="mr-2" />
+                                            Thêm bổ sung
+                                        </button>
+                                    </div>
+                                )}
                             </>
                         ) : (
                             <div className="h-full flex flex-col items-center justify-center text-slate-400">
